@@ -1,4 +1,4 @@
-export async function getComments() {
+export async function getCommentsApi() {
 	return await fetch("./data/comments.json", {
 		headers: {
 			"Content-Type": "application/json",
@@ -13,14 +13,17 @@ export async function getComments() {
 		});
 }
 
-
-export const createComment = async (text, parentId = null) => {
+export const createCommentApi = async (text, parentId = null) => {
 	return {
-	  id: Math.random().toString(10).substr(2,9),
-	  body: text,
-	  parentId,
-	  userId: "1",
-	  username: "John",
-	  createdAt: new Date().toISOString(),
+		id: Math.random().toString(10).substr(2, 9),
+		body: text,
+		parentId,
+		userId: "1",
+		username: "John",
+		createdAt: new Date().toISOString(),
 	};
-  };
+};
+
+export const deleteCommentApi = async () => {
+	return {};
+};

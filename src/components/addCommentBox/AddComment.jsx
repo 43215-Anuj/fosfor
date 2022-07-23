@@ -4,9 +4,10 @@ import {Button} from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
-import TextField from '@mui/material/TextField';
+import TextField from "@mui/material/TextField";
 
-const AddComment = () => {
+const AddComment = (props) => {
+	const {currentuser} = props;
 	return (
 		<Box
 			className="comment_wrapper"
@@ -26,7 +27,7 @@ const AddComment = () => {
 					bgcolor: "#" + Math.floor(Math.random() * 16777215).toString(16),
 				}}
 				alt="asjds"
-				src="/static/images/avatar/13.jpg"
+				src={currentuser}
 			/>
 			<Box
 				className="comment_container"
@@ -52,7 +53,7 @@ const AddComment = () => {
 						left: "-2.2rem",
 					}}
 				/>
-				<Box className="comment_body">
+				<Box className="comment_body" sx={{width: "100%"}}>
 					<Box
 						className="comment_head"
 						sx={{
@@ -63,12 +64,17 @@ const AddComment = () => {
 						}}
 					>
 						<TextField
-							id="filled-basic"
+							fullWidth
+							id="comment_text_box"
 							label="Add Comment"
+							multiline
+							rows={4}
 							variant="filled"
 						/>
 					</Box>
-					<Button>Send</Button>
+					<Button sx={{float: "right"}} variant="contained">
+						Send
+					</Button>
 				</Box>
 			</Box>
 		</Box>

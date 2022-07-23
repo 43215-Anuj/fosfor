@@ -1,31 +1,44 @@
 import React, {useEffect, useState} from "react";
 import "./Home.scss";
-import {getComments} from "../../functions/apis";
+import {getCommentsApi, deleteCommentApi} from "../../functions/apis";
 import Container from "@mui/material/Container";
 import Comment from "../../components/comment/Comment";
-import AddComment from "../../components/addCommentBox/AddComment";
 
 const Home = () => {
 	const [allComments, setAllComments] = useState();
-	const [rootLevel, setRootLevel] = useState();
+	const [activeComment, setActiveComment] = useState(null);
+	
+	
+	const rootLevel =
+		allComments && allComments.filter((comment) => comment.parentId === null);
+
+	rootLevel &&
+		rootLevel.sort(function (a, b) {
+			return parseInt(b.upvotes - a.upvotes);
+		});
 
 	useEffect(() => {
 		async function fetchData() {
 			let data = [];
-			data = await getComments();
+			data = await getCommentsApi();
 
 			Promise.all([data]).then((res) => {
 				setAllComments(res[0]);
-				var root = res[0].filter((comment) => comment.parentId === null);
-
-				root.sort(function (a, b) {
-					return parseInt(b.upvotes - a.upvotes);
-				});
-				setRootLevel(root);
 			});
 		}
 		fetchData();
 	}, []);
+
+	const deleteComment = (commentId) => {
+		if (window.confirm("Are you sure you want to remove comment?")) {
+			deleteCommentApi().then(() => {
+				const updatedComments = allComments.filter(
+					(comment) => comment.id !== commentId
+				);
+				setAllComments(updatedComments);
+			});
+		}
+	};
 
 	const getReplies = (commentId) =>
 		allComments
@@ -36,27 +49,14 @@ const Home = () => {
 					new Date(b.created_time).getTime()
 			);
 
-	const handleDownVotes = (id) => {
-		let arr = allComments.map((comment) => {
-			if (comment.id === id) {
-				console.log("in");
-				return {
-					...comment,
-					upvotes: (parseInt(comment.upvotes) - 1).toString(),
-				};
-			} else {
-				return comment;
-			}
-		});
-		setAllComments(arr);
-	};
-	
-	const handleUpVotes = (id) => {
+	const handleVotes = (action, id) => {
 		let arr = allComments.map((comment) => {
 			if (comment.id === id) {
 				return {
 					...comment,
-					upvotes: (parseInt(comment.upvotes) + 1).toString(),
+					upvotes: action
+						? (parseInt(comment.upvotes) + 1).toString()
+						: (parseInt(comment.upvotes) - 1).toString(),
 				};
 			} else {
 				return comment;
@@ -83,13 +83,15 @@ const Home = () => {
 							<Comment
 								key={rootcomment.id}
 								comment={rootcomment}
-								handleDownVotes={handleDownVotes}
-								handleUpVotes={handleUpVotes}
+								handleVotes={handleVotes}
+								activeComment={activeComment}
+								deleteComment={deleteComment}
+								setActiveComment={setActiveComment}
 								replies={getReplies(rootcomment.id)}
 							/>
 					  ))
 					: "Loading..."}
-				<AddComment />
+				
 			</Container>
 		</div>
 	);

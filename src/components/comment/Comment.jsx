@@ -1,15 +1,28 @@
-import React, {useEffect} from "react";
+import React, {useState} from "react";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import ReplyIcon from "@mui/icons-material/Reply";
 import "./comment.scss";
 import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
 import {IconButton} from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
+import AddComment from "../addCommentBox/AddComment";
 
 export default function Comment(props) {
-	const {comment, replies, handleDownVotes, handleUpVotes} = props;
+	const {
+		comment,
+		replies,
+		handleVotes,
+		deleteComment,
+		activeComment,
+		setActiveComment,
+	} = props;
+
+	const [isReplying, setIsReplying] = useState(false);
 
 	function timeDifference(current, previous) {
 		var msPerMinute = 60 * 1000;
@@ -38,7 +51,10 @@ export default function Comment(props) {
 	return (
 		<>
 			<Box
-				className="comment_wrapper"
+				onClick={() => setActiveComment(comment.id)}
+				className={`${
+					activeComment === comment.id ? "active" : ""
+				} comment_wrapper`}
 				sx={{
 					bgcolor: "transparent",
 					height: "fit-content",
@@ -76,7 +92,10 @@ export default function Comment(props) {
 					<ArrowLeftIcon
 						sx={{
 							fontSize: "4rem",
-							color: "#fff",
+							color:
+								activeComment === comment.id
+									? "rgb(222, 244, 255)"
+									: "#fff",
 							position: "absolute",
 							top: "0",
 							left: "-2.2rem",
@@ -96,7 +115,7 @@ export default function Comment(props) {
 						}}
 					>
 						<IconButton
-							onClick={() => handleUpVotes(comment.id)}
+							onClick={() => handleVotes(true, comment.id)}
 							aria-label="upvote"
 							sx={{
 								bgcolor: "#fff",
@@ -110,7 +129,7 @@ export default function Comment(props) {
 						</IconButton>
 						<p className="vote_score">{parseInt(comment.upvotes)}</p>
 						<IconButton
-							onClick={() => handleDownVotes(comment.id)}
+							onClick={() => handleVotes(false, comment.id)}
 							aria-label="downvote"
 							sx={{
 								bgcolor: "#fff",
@@ -128,7 +147,8 @@ export default function Comment(props) {
 							className="comment_head"
 							sx={{
 								display: "flex",
-								alignItems: "flex-end",
+								alignItems: "flex-start",
+								justifyContent: "space-between",
 								position: "relative",
 								marginBottom: "1rem",
 							}}
@@ -140,22 +160,28 @@ export default function Comment(props) {
 									new Date(comment.created_time)
 								)}
 							</p>
-							<Box
-								element="span"
-								sx={{
-									display: "flex",
-									alignItems: "center",
-									color: "#0077b5",
-									position: "absolute",
-									right: "0",
-									top: 0,
-								}}
-							>
-								<ReplyIcon />
-								<Box element="span" sx={{marginLeft: "0.5rem"}}>
-									Reply
+
+							{activeComment === comment.id ? (
+								<Box className="action_buttons">
+									<Button startIcon={<ModeEditOutlineOutlinedIcon />}>
+										Edit
+									</Button>
+									<Button
+										onClick={() => deleteComment(comment.id)}
+										sx={{color: "red"}}
+										startIcon={<DeleteOutlineIcon />}
+									>
+										Delete
+									</Button>
 								</Box>
-							</Box>
+							) : (
+								<Box
+									onClick={() => setIsReplying(true)}
+									className="action_buttons"
+								>
+									<Button startIcon={<ReplyIcon />}>Reply</Button>
+								</Box>
+							)}
 						</Box>
 						<p className="comment_text">{comment.comment}</p>
 					</Box>
@@ -168,13 +194,18 @@ export default function Comment(props) {
 							<Comment
 								key={reply.id}
 								comment={reply}
-								handleDownVotes={handleDownVotes}
-								handleUpVotes={handleUpVotes}
+								handleVotes={handleVotes}
+								activeComment={activeComment}
+								deleteComment={deleteComment}
+								setActiveComment={setActiveComment}
 								replies={[]}
 							/>
 						);
 					})}
 			</Box>
+			{isReplying && activeComment === comment.id && (
+				<AddComment currentuser={comment.src} />
+			)}
 		</>
 	);
 }
