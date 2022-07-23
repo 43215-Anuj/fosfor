@@ -2,10 +2,15 @@ $brand_primary_color: #fff;
 $brand_secondary_color: #ccc;
 $brand__tertiary_color: #bbb;
 
-$link-disabled-color: #666666 !default;
+$link-disabled-color: #a9a6a6 !default;
 
 $black-bg: rgba(30, 30, 30, 0.97) !default;
 $black-font-color: #444444 !default;
+$black-color-opacity-1: rgba(0, 0, 0, 0.1) !default;
+$black-color-opacity-2: rgba(0, 0, 0, 0.2) !default;
+$black-color-opacity-3: rgba(0, 0, 0, 0.4) !default;
+$black-color-opacity-4: rgba(0, 0, 0, 0.6) !default;
+$black-color-opacity-5: rgba(0, 0, 0, 0.8) !default;
 
 $white-bg: #ffffff !default;
 $white-font-color: #ffffff !default;
@@ -40,8 +45,8 @@ $font-size-h2: 3.5rem !default; // ~ 35px
 $font-size-h3: 2.8rem !default; // ~ 28px
 $font-size-h4: 2.4rem !default; // ~ 24px
 $font-size-h5: 2.2rem !default; // ~ 22px
-$font-size-h6: 1.2rem !default; // ~ 12px
-$font-paragraph: 1rem !default;
+$font-size-h6: 1.8rem !default; // ~ 12px
+$font-paragraph: 1.6rem !default;
 
 $font-weight-bold: 700 !default;
 $font-weight-medium: 500 !default;
