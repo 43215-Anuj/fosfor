@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect} from "react";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import ReplyIcon from "@mui/icons-material/Reply";
@@ -9,8 +9,7 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 
 export default function Comment(props) {
-	const {data} = props;
-	const [time, setTime] = useState();
+	const {comment, replies, handleDownVotes, handleUpVotes} = props;
 
 	function timeDifference(current, previous) {
 		var msPerMinute = 60 * 1000;
@@ -19,21 +18,20 @@ export default function Comment(props) {
 		var msPerMonth = msPerDay * 30;
 		var msPerYear = msPerDay * 365;
 
-		console.log(current.getTime(), previous.getTime());
 		var elapsed = current.getTime() - previous.getTime();
 
 		if (elapsed < msPerMinute) {
-			return Math.round(elapsed / 1000) + " seconds ago";
+			return Math.round(elapsed / 1000) + " sec ago";
 		} else if (elapsed < msPerHour) {
-			return Math.round(elapsed / msPerMinute) + " minutes ago";
+			return Math.round(elapsed / msPerMinute) + " min ago";
 		} else if (elapsed < msPerDay) {
-			return Math.round(elapsed / msPerHour) + " hours ago";
+			return Math.round(elapsed / msPerHour) + " h ago";
 		} else if (elapsed < msPerMonth) {
-			return Math.round(elapsed / msPerDay) + " days ago";
+			return Math.round(elapsed / msPerDay) + " d ago";
 		} else if (elapsed < msPerYear) {
-			return Math.round(elapsed / msPerMonth) + " months ago";
+			return Math.round(elapsed / msPerMonth) + " mon ago";
 		} else {
-			return Math.round(elapsed / msPerYear) + " years ago";
+			return Math.round(elapsed / msPerYear) + " yrs ago";
 		}
 	}
 
@@ -57,8 +55,8 @@ export default function Comment(props) {
 						bgcolor:
 							"#" + Math.floor(Math.random() * 16777215).toString(16),
 					}}
-					alt={data.fullname}
-					src={data.src}
+					alt={comment.fullname}
+					src={comment.src}
 				/>
 				<Box
 					className="comment_container"
@@ -98,6 +96,7 @@ export default function Comment(props) {
 						}}
 					>
 						<IconButton
+							onClick={() => handleUpVotes(comment.id)}
 							aria-label="upvote"
 							sx={{
 								bgcolor: "#fff",
@@ -109,10 +108,9 @@ export default function Comment(props) {
 						>
 							<AddIcon />
 						</IconButton>
-						<p className="vote_score">
-							{parseInt(data.upvotes) - parseInt(data.downvotes)}
-						</p>
+						<p className="vote_score">{parseInt(comment.upvotes)}</p>
 						<IconButton
+							onClick={() => handleDownVotes(comment.id)}
 							aria-label="downvote"
 							sx={{
 								bgcolor: "#fff",
@@ -135,11 +133,11 @@ export default function Comment(props) {
 								marginBottom: "1rem",
 							}}
 						>
-							<p className="username">{data.fullname}</p>
+							<p className="username">{comment.fullname}</p>
 							<p className="created_time">
 								{timeDifference(
 									new Date(),
-									new Date(data.created_time)
+									new Date(comment.created_time)
 								)}
 							</p>
 							<Box
@@ -159,14 +157,22 @@ export default function Comment(props) {
 								</Box>
 							</Box>
 						</Box>
-						<p className="comment_text">{data.comment}</p>
+						<p className="comment_text">{comment.comment}</p>
 					</Box>
 				</Box>
 			</Box>
 			<Box className="replies">
-				{data.replies &&
-					data.replies.map((reply) => {
-						return <Comment key={reply.id} data={reply} />;
+				{replies &&
+					replies.map((reply) => {
+						return (
+							<Comment
+								key={reply.id}
+								comment={reply}
+								handleDownVotes={handleDownVotes}
+								handleUpVotes={handleUpVotes}
+								replies={[]}
+							/>
+						);
 					})}
 			</Box>
 		</>

@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from "react";
 import "./Home.scss";
 import {getComments} from "../../functions/apis";
-import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Comment from "../../components/comment/Comment";
+import AddComment from "../../components/addCommentBox/AddComment";
 
 const Home = () => {
 	const [allComments, setAllComments] = useState();
-	// const [firstLevel, setFirstLevel] = useState();
+	const [rootLevel, setRootLevel] = useState();
 
 	useEffect(() => {
 		async function fetchData() {
@@ -15,17 +15,55 @@ const Home = () => {
 			data = await getComments();
 
 			Promise.all([data]).then((res) => {
-				res[0].sort(function (a, b) {
-					console.log(parseInt(b.upvotes - b.downvotes));
-					return parseInt(
-						b.upvotes - b.downvotes - (a.upvotes - a.downvotes)
-					);
-				});
 				setAllComments(res[0]);
+				var root = res[0].filter((comment) => comment.parentId === null);
+
+				root.sort(function (a, b) {
+					return parseInt(b.upvotes - a.upvotes);
+				});
+				setRootLevel(root);
 			});
 		}
 		fetchData();
 	}, []);
+
+	const getReplies = (commentId) =>
+		allComments
+			.filter((comment) => comment.parentId === commentId)
+			.sort(
+				(a, b) =>
+					new Date(a.created_time).getTime() -
+					new Date(b.created_time).getTime()
+			);
+
+	const handleDownVotes = (id) => {
+		let arr = allComments.map((comment) => {
+			if (comment.id === id) {
+				console.log("in");
+				return {
+					...comment,
+					upvotes: (parseInt(comment.upvotes) - 1).toString(),
+				};
+			} else {
+				return comment;
+			}
+		});
+		setAllComments(arr);
+	};
+	
+	const handleUpVotes = (id) => {
+		let arr = allComments.map((comment) => {
+			if (comment.id === id) {
+				return {
+					...comment,
+					upvotes: (parseInt(comment.upvotes) + 1).toString(),
+				};
+			} else {
+				return comment;
+			}
+		});
+		setAllComments(arr);
+	};
 
 	return (
 		<div className="wrapper">
@@ -40,11 +78,18 @@ const Home = () => {
 					justifyContent: "space-between",
 				}}
 			>
-				{allComments
-					? allComments.map((comment) => (
-							<Comment key={comment.id} data={comment} />
+				{rootLevel
+					? rootLevel.map((rootcomment) => (
+							<Comment
+								key={rootcomment.id}
+								comment={rootcomment}
+								handleDownVotes={handleDownVotes}
+								handleUpVotes={handleUpVotes}
+								replies={getReplies(rootcomment.id)}
+							/>
 					  ))
 					: "Loading..."}
+				<AddComment />
 			</Container>
 		</div>
 	);
