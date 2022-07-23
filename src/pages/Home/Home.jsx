@@ -7,7 +7,7 @@ import Comment from "../../components/comment/Comment";
 
 const Home = () => {
 	const [allComments, setAllComments] = useState();
-	const [firstLevel, setFirstLevel] = useState();
+	// const [firstLevel, setFirstLevel] = useState();
 
 	useEffect(() => {
 		async function fetchData() {
@@ -15,12 +15,13 @@ const Home = () => {
 			data = await getComments();
 
 			Promise.all([data]).then((res) => {
-				setAllComments(res);
-
-				let first_lev = res.filter((comment) => {
-					console.log(comment.comment_id);
+				res[0].sort(function (a, b) {
+					console.log(parseInt(b.upvotes - b.downvotes));
+					return parseInt(
+						b.upvotes - b.downvotes - (a.upvotes - a.downvotes)
+					);
 				});
-				console.log(first_lev);
+				setAllComments(res[0]);
 			});
 		}
 		fetchData();
@@ -28,19 +29,22 @@ const Home = () => {
 
 	return (
 		<div className="wrapper">
-			<Container maxWidth="sm">
-				<Box
-					sx={{
-						bgcolor: "#EDEFF2",
-						padding: "2rem 0",
-						minHeight: "100vh",
-						height: "100%",
-						display: "flex",
-						justifyContent: "space-between",
-					}}
-				>
-					<Comment />
-				</Box>
+			<Container
+				maxWidth="sm"
+				sx={{
+					bgcolor: "#EDEFF2",
+					minHeight: "100vh",
+					height: "100%",
+					display: "flex",
+					flexDirection: "column",
+					justifyContent: "space-between",
+				}}
+			>
+				{allComments
+					? allComments.map((comment) => (
+							<Comment key={comment.id} data={comment} />
+					  ))
+					: "Loading..."}
 			</Container>
 		</div>
 	);

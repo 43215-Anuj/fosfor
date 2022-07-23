@@ -23,5 +23,15 @@
 
 .vote_score {
 	font-size: 1.4rem;
-	margin: 1rem 0 ;
+	margin: 1rem 0;
+	font-weight: 600;
+}
+
+.replies {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+}
+.replies > .comment_wrapper {
+	width: 85%;
 }
