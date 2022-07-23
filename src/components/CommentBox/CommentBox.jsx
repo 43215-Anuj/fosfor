@@ -1,13 +1,19 @@
-import "./Addcomment.scss";
-import React from "react";
+import "./commentbox.scss";
+import React, {useState} from "react";
 import {Button} from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
 import TextField from "@mui/material/TextField";
 
-const AddComment = (props) => {
-	const {currentuser} = props;
+const ComponentBox = (props) => {
+	const {currentuser, comment, updateComment, action} = props;
+	const [updatedComment, setUpdatedComment] = useState(comment.comment);
+
+	function handleComment(e) {
+		setUpdatedComment(e.target.value);
+	}
+
 	return (
 		<Box
 			className="comment_wrapper"
@@ -63,16 +69,35 @@ const AddComment = (props) => {
 							marginBottom: "1rem",
 						}}
 					>
-						<TextField
-							fullWidth
-							id="comment_text_box"
-							label="Add Comment"
-							multiline
-							rows={4}
-							variant="filled"
-						/>
+						{action === "edit" && (
+							<TextField
+								fullWidth
+								multiline
+								rows={4}
+								value={updatedComment}
+								onChange={handleComment}
+								variant="filled"
+								id="comment_text_box"
+								label={"Edit Comment"}
+							/>
+						)}
+						{action === "reply" && (
+							<TextField
+								fullWidth
+								multiline
+								rows={4}
+								onChange={handleComment}
+								variant="filled"
+								id="comment_text_box"
+								label={"Add Comment"}
+							/>
+						)}
 					</Box>
-					<Button sx={{float: "right"}} variant="contained">
+					<Button
+						onClick={() => updateComment(comment.id, updatedComment)}
+						sx={{float: "right"}}
+						variant="contained"
+					>
 						Send
 					</Button>
 				</Box>
@@ -81,4 +106,4 @@ const AddComment = (props) => {
 	);
 };
 
-export default AddComment;
+export default ComponentBox;

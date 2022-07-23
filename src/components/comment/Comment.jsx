@@ -10,19 +10,21 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
-import AddComment from "../addCommentBox/AddComment";
+import ComponentBox from "../CommentBox/CommentBox";
 
 export default function Comment(props) {
 	const {
 		comment,
 		replies,
 		handleVotes,
+		addComment,
 		deleteComment,
+		updateComment,
 		activeComment,
 		setActiveComment,
 	} = props;
 
-	const [isReplying, setIsReplying] = useState(false);
+	const [action, setAction] = useState();
 
 	function timeDifference(current, previous) {
 		var msPerMinute = 60 * 1000;
@@ -163,7 +165,10 @@ export default function Comment(props) {
 
 							{activeComment === comment.id ? (
 								<Box className="action_buttons">
-									<Button startIcon={<ModeEditOutlineOutlinedIcon />}>
+									<Button
+										onClick={() => setAction("edit")}
+										startIcon={<ModeEditOutlineOutlinedIcon />}
+									>
 										Edit
 									</Button>
 									<Button
@@ -175,11 +180,13 @@ export default function Comment(props) {
 									</Button>
 								</Box>
 							) : (
-								<Box
-									onClick={() => setIsReplying(true)}
-									className="action_buttons"
-								>
-									<Button startIcon={<ReplyIcon />}>Reply</Button>
+								<Box className="action_buttons">
+									<Button
+										onClick={() => setAction("reply")}
+										startIcon={<ReplyIcon />}
+									>
+										Reply
+									</Button>
 								</Box>
 							)}
 						</Box>
@@ -195,6 +202,7 @@ export default function Comment(props) {
 								key={reply.id}
 								comment={reply}
 								handleVotes={handleVotes}
+								updateComment={updateComment}
 								activeComment={activeComment}
 								deleteComment={deleteComment}
 								setActiveComment={setActiveComment}
@@ -203,8 +211,22 @@ export default function Comment(props) {
 						);
 					})}
 			</Box>
-			{isReplying && activeComment === comment.id && (
-				<AddComment currentuser={comment.src} />
+			{action === "reply" && activeComment === comment.id && (
+				<ComponentBox
+					comment={comment}
+					currentuser={comment.src}
+					action={action}
+					updateComment={addComment}
+					
+				/>
+			)}
+			{action === "edit" && activeComment === comment.id && (
+				<ComponentBox
+					comment={comment}
+					currentuser={comment.src}
+					action={action}
+					updateComment={updateComment}
+				/>
 			)}
 		</>
 	);

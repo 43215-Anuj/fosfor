@@ -3,12 +3,12 @@ import "./Home.scss";
 import {getCommentsApi, deleteCommentApi} from "../../functions/apis";
 import Container from "@mui/material/Container";
 import Comment from "../../components/comment/Comment";
+import {createCommentApi} from "../../functions/apis";
 
 const Home = () => {
 	const [allComments, setAllComments] = useState();
 	const [activeComment, setActiveComment] = useState(null);
-	
-	
+
 	const rootLevel =
 		allComments && allComments.filter((comment) => comment.parentId === null);
 
@@ -28,6 +28,15 @@ const Home = () => {
 		}
 		fetchData();
 	}, []);
+
+	const addComment = (commentId, text) => {
+		
+		createCommentApi(commentId, text).then((comment) => {
+			console.log(comment);
+			setAllComments([comment, ...allComments]);
+			setActiveComment(null);
+		});
+	};
 
 	const deleteComment = (commentId) => {
 		if (window.confirm("Are you sure you want to remove comment?")) {
@@ -65,6 +74,20 @@ const Home = () => {
 		setAllComments(arr);
 	};
 
+	const updateComment = (commentId, text) => {
+		let arr = allComments.map((comment) => {
+			if (comment.id === commentId) {
+				return {
+					...comment,
+					comment: text,
+				};
+			} else {
+				return comment;
+			}
+		});
+		setAllComments(arr);
+	};
+
 	return (
 		<div className="wrapper">
 			<Container
@@ -84,6 +107,8 @@ const Home = () => {
 								key={rootcomment.id}
 								comment={rootcomment}
 								handleVotes={handleVotes}
+								addComment={addComment}
+								updateComment={updateComment}
 								activeComment={activeComment}
 								deleteComment={deleteComment}
 								setActiveComment={setActiveComment}
@@ -91,7 +116,6 @@ const Home = () => {
 							/>
 					  ))
 					: "Loading..."}
-				
 			</Container>
 		</div>
 	);

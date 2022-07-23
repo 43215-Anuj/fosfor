@@ -13,14 +13,15 @@ export async function getCommentsApi() {
 		});
 }
 
-export const createCommentApi = async (text, parentId = null) => {
+export const createCommentApi = async (parentId = null, text) => {
 	return {
-		id: Math.random().toString(10).substr(2, 9),
-		body: text,
+		id: Math.floor(Math.random() * (100 - 0 + 1) + 0).toString(),
+		comment: text,
 		parentId,
-		userId: "1",
+		upvotes: 0,
+		src: "/static/images/avatar/1.jpg",
 		username: "John",
-		createdAt: new Date().toISOString(),
+		createdAt: new Date().toISOString().split("T")[0].toString(),
 	};
 };
 
