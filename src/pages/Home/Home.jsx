@@ -30,9 +30,7 @@ const Home = () => {
 	}, []);
 
 	const addComment = (commentId, text) => {
-		
 		createCommentApi(commentId, text).then((comment) => {
-			console.log(comment);
 			setAllComments([comment, ...allComments]);
 			setActiveComment(null);
 		});
@@ -86,6 +84,7 @@ const Home = () => {
 			}
 		});
 		setAllComments(arr);
+		setActiveComment(null);
 	};
 
 	return (

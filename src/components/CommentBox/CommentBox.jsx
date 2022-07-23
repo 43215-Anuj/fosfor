@@ -8,7 +8,9 @@ import TextField from "@mui/material/TextField";
 
 const ComponentBox = (props) => {
 	const {currentuser, comment, updateComment, action} = props;
-	const [updatedComment, setUpdatedComment] = useState(comment.comment);
+	const [updatedComment, setUpdatedComment] = useState(
+		action === "reply" ? "" : comment.comment
+	);
 
 	function handleComment(e) {
 		setUpdatedComment(e.target.value);
@@ -86,6 +88,7 @@ const ComponentBox = (props) => {
 								fullWidth
 								multiline
 								rows={4}
+								value={updatedComment}
 								onChange={handleComment}
 								variant="filled"
 								id="comment_text_box"

@@ -156,6 +156,19 @@ export default function Comment(props) {
 							}}
 						>
 							<p className="username">{comment.fullname}</p>
+							{comment.fullname === "Anuj kumar" && (
+								<Box
+									element="span"
+									sx={{
+										bgcolor: "#0077b5",
+										padding: "0.5rem 1rem",
+										color: "#fff",
+										borderRadius: "0.5rem",
+									}}
+								>
+									You
+								</Box>
+							)}
 							<p className="created_time">
 								{timeDifference(
 									new Date(),
@@ -217,7 +230,6 @@ export default function Comment(props) {
 					currentuser={comment.src}
 					action={action}
 					updateComment={addComment}
-					
 				/>
 			)}
 			{action === "edit" && activeComment === comment.id && (
