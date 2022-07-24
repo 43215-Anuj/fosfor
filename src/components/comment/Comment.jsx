@@ -254,7 +254,7 @@ export default function Comment(props) {
 									activeComment === reply.id && (
 										<ComponentBox
 											comment={comment}
-											currentuser={"/assets/2.jpg"}
+											currentuser={comment.src}
 											activeComment={activeComment}
 											setActiveComment={setActiveComment}
 											action={action}
@@ -283,7 +283,7 @@ export default function Comment(props) {
 				activeComment === comment.id && (
 					<ComponentBox
 						comment={comment}
-						currentuser={"/assets/2.jpg"}
+						currentuser={comment.src}
 						activeComment={activeComment}
 						setActiveComment={setActiveComment}
 						action={action}
