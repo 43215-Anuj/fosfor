@@ -8,7 +8,7 @@ import {createCommentApi} from "../../functions/apis";
 const Home = () => {
 	const [allComments, setAllComments] = useState();
 	const [activeComment, setActiveComment] = useState(null);
-
+	const [action, setAction] = useState();
 	const rootLevel =
 		allComments && allComments.filter((comment) => comment.parentId === null);
 
@@ -33,7 +33,10 @@ const Home = () => {
 		createCommentApi(commentId, text).then((comment) => {
 			setAllComments([comment, ...allComments]);
 			setActiveComment(null);
+			setAction(null);
 		});
+
+		console.log("hi", text);
 	};
 
 	const deleteComment = (commentId) => {
@@ -45,6 +48,7 @@ const Home = () => {
 				setAllComments(updatedComments);
 			});
 		}
+		setAction(null);
 	};
 
 	const getReplies = (commentId) =>
@@ -70,6 +74,7 @@ const Home = () => {
 			}
 		});
 		setAllComments(arr);
+		setAction(null);
 	};
 
 	const updateComment = (commentId, text) => {
@@ -85,6 +90,7 @@ const Home = () => {
 		});
 		setAllComments(arr);
 		setActiveComment(null);
+		setAction(null);
 	};
 
 	return (
@@ -103,7 +109,9 @@ const Home = () => {
 				{rootLevel
 					? rootLevel.map((rootcomment) => (
 							<Comment
+								action={action}
 								key={rootcomment.id}
+								setAction={setAction}
 								comment={rootcomment}
 								handleVotes={handleVotes}
 								addComment={addComment}
@@ -111,7 +119,7 @@ const Home = () => {
 								activeComment={activeComment}
 								deleteComment={deleteComment}
 								setActiveComment={setActiveComment}
-								replies={getReplies(rootcomment.id)}
+								getReplies={getReplies}
 							/>
 					  ))
 					: "Loading..."}

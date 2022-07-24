@@ -11,11 +11,14 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
 import ComponentBox from "../CommentBox/CommentBox";
+import {useEffect} from "react";
 
 export default function Comment(props) {
 	const {
+		action,
+		setAction,
 		comment,
-		replies,
+		getReplies,
 		handleVotes,
 		addComment,
 		deleteComment,
@@ -24,7 +27,11 @@ export default function Comment(props) {
 		setActiveComment,
 	} = props;
 
-	const [action, setAction] = useState();
+	const [replies, setReplies] = useState();
+
+	useEffect(() => {
+		setReplies(getReplies(comment.id));
+	}, [activeComment, comment, getReplies]);
 
 	function timeDifference(current, previous) {
 		var msPerMinute = 60 * 1000;
@@ -50,10 +57,14 @@ export default function Comment(props) {
 		}
 	}
 
+	function handleActiveComponent() {
+		setActiveComment(comment.id);
+	}
+
 	return (
 		<>
 			<Box
-				onClick={() => setActiveComment(comment.id)}
+				onClick={handleActiveComponent}
 				className={`${
 					activeComment === comment.id ? "active" : ""
 				} comment_wrapper`}
@@ -195,7 +206,9 @@ export default function Comment(props) {
 							) : (
 								<Box className="action_buttons">
 									<Button
-										onClick={() => setAction("reply")}
+										onClick={() => {
+											setAction("reply");
+										}}
 										startIcon={<ReplyIcon />}
 									>
 										Reply
@@ -209,37 +222,62 @@ export default function Comment(props) {
 			</Box>
 			<Box className="replies">
 				{replies &&
+					replies.length !== 0 &&
 					replies.map((reply) => {
 						return (
-							<Comment
-								key={reply.id}
-								comment={reply}
-								handleVotes={handleVotes}
-								updateComment={updateComment}
-								activeComment={activeComment}
-								deleteComment={deleteComment}
-								setActiveComment={setActiveComment}
-								replies={[]}
-							/>
+							<React.Fragment key={reply.id}>
+								<Comment
+									comment={reply}
+									action={action}
+									setAction={setAction}
+									handleVotes={handleVotes}
+									updateComment={addComment}
+									activeComment={activeComment}
+									deleteComment={deleteComment}
+									setActiveComment={setActiveComment}
+									getReplies={getReplies}
+								/>
+								{reply.parentId != null &&
+									action === "reply" &&
+									activeComment === reply.id && (
+										<ComponentBox
+											comment={comment}
+											currentuser={comment.src}
+											action={action}
+											activeComment={activeComment}
+											setActiveComment={setActiveComment}
+											updateComment={addComment}
+										/>
+									)}
+							</React.Fragment>
 						);
 					})}
 			</Box>
-			{action === "reply" && activeComment === comment.id && (
-				<ComponentBox
-					comment={comment}
-					currentuser={comment.src}
-					action={action}
-					updateComment={addComment}
-				/>
-			)}
-			{action === "edit" && activeComment === comment.id && (
-				<ComponentBox
-					comment={comment}
-					currentuser={comment.src}
-					action={action}
-					updateComment={updateComment}
-				/>
-			)}
+
+			{comment.parentId === null &&
+				action === "reply" &&
+				activeComment === comment.id && (
+					<ComponentBox
+						comment={comment}
+						currentuser={comment.src}
+						action={action}
+						activeComment={activeComment}
+						setActiveComment={setActiveComment}
+						updateComment={addComment}
+					/>
+				)}
+			{comment.parentId === null &&
+				action === "edit" &&
+				activeComment === comment.id && (
+					<ComponentBox
+						comment={comment}
+						currentuser={comment.src}
+						activeComment={activeComment}
+						setActiveComment={setActiveComment}
+						action={action}
+						updateComment={updateComment}
+					/>
+				)}
 		</>
 	);
 }
