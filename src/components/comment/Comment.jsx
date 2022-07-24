@@ -237,7 +237,7 @@ export default function Comment(props) {
 									setActiveComment={setActiveComment}
 									getReplies={getReplies}
 								/>
-								{reply.parentId != null &&
+								{reply.parentId !== null &&
 									action === "reply" &&
 									activeComment === reply.id && (
 										<ComponentBox
@@ -247,6 +247,18 @@ export default function Comment(props) {
 											activeComment={activeComment}
 											setActiveComment={setActiveComment}
 											updateComment={addComment}
+										/>
+									)}
+								{reply.parentId !== null &&
+									action === "edit" &&
+									activeComment === reply.id && (
+										<ComponentBox
+											comment={comment}
+											currentuser={"/assets/2.jpg"}
+											activeComment={activeComment}
+											setActiveComment={setActiveComment}
+											action={action}
+											updateComment={updateComment}
 										/>
 									)}
 							</React.Fragment>
