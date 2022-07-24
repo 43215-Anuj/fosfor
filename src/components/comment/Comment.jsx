@@ -28,7 +28,7 @@ export default function Comment(props) {
 	} = props;
 
 	const [replies, setReplies] = useState();
-
+	
 	useEffect(() => {
 		setReplies(getReplies(comment.id));
 	}, [activeComment, comment, getReplies]);

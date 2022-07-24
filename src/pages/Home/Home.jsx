@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, useMemo} from "react";
 import "./Home.scss";
 import {getCommentsApi, deleteCommentApi} from "../../functions/apis";
 import Container from "@mui/material/Container";
@@ -9,13 +9,23 @@ const Home = () => {
 	const [allComments, setAllComments] = useState();
 	const [activeComment, setActiveComment] = useState(null);
 	const [action, setAction] = useState();
-	const rootLevel =
-		allComments && allComments.filter((comment) => comment.parentId === null);
 
-	rootLevel &&
-		rootLevel.sort(function (a, b) {
-			return parseInt(b.upvotes - a.upvotes);
-		});
+	const rootLevel = useMemo(() => {
+		return getRootLevelComments(allComments);
+	}, [allComments]);
+
+	function getRootLevelComments(allComments) {
+		const root =
+			allComments &&
+			allComments.filter((comment) => comment.parentId === null);
+
+		root &&
+			root.sort(function (a, b) {
+				return parseInt(b.upvotes - a.upvotes);
+			});
+
+		return root;
+	}
 
 	useEffect(() => {
 		async function fetchData() {
@@ -26,6 +36,7 @@ const Home = () => {
 				setAllComments(res[0]);
 			});
 		}
+
 		fetchData();
 	}, []);
 
@@ -35,8 +46,6 @@ const Home = () => {
 			setActiveComment(null);
 			setAction(null);
 		});
-
-		console.log("hi", text);
 	};
 
 	const deleteComment = (commentId) => {
