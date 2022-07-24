@@ -7,7 +7,7 @@
 			"comment": "Duis at velit eu est congue elementum. In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo. Aliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis. Sed ante. Vivamus tortor. Duis mattis egestas metus.",
 			"created_time": "2022-07-24",
 			"upvotes": "27",
-			"src": "/static/images/avatar/1.jpg"
+			"src": "/assets/1.jpg"
 		},
 		{
 			"id": "2",
@@ -16,7 +16,7 @@
 			"comment": "Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem. Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat. Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.",
 			"created_time": "2021-11-18",
 			"upvotes": "13",
-			"src": "/static/images/avatar/1.jpg"
+			"src": "/assets/2.jpg"
 		},
 		{
 			"id": "3",
@@ -25,7 +25,7 @@
 			"comment": "Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede. Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem. Fusce consequat. Nulla nisl.",
 			"created_time": "2021-07-29",
 			"upvotes": "16",
-			"src": "/static/images/avatar/1.jpg"
+			"src": "/assets/3.jpg"
 		},
 		{
 			"id": "4",
@@ -34,7 +34,7 @@
 			"comment": "Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus. Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero. Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum.",
 			"created_time": "2021-08-23",
 			"upvotes": "66",
-			"src": "/static/images/avatar/1.jpg"
+			"src": "/assets/4.jpg"
 		},
 		{
 			"id": "5",
@@ -43,7 +43,7 @@
 			"comment": "Nullam molestie nibh in lectus.",
 			"created_time": "2022-01-29",
 			"upvotes": "86",
-			"src": "/static/images/avatar/1.jpg"
+			"src": "/assets/5.jpg"
 		},
 		{
 			"id": "6",
@@ -52,7 +52,7 @@
 			"comment": "Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus. Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst.",
 			"created_time": "2021-12-12",
 			"upvotes": "27",
-			"src": "/static/images/avatar/1.jpg"
+			"src": "/assets/6.jpg"
 		},
 		{
 			"id": "7",
@@ -61,7 +61,7 @@
 			"comment": "Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem. Sed sagittis.",
 			"created_time": "2022-05-08",
 			"upvotes": "89",
-			"src": "/static/images/avatar/1.jpg"
+			"src": "/assets/7.jpg"
 		},
 		{
 			"id": "8",
@@ -70,7 +70,7 @@
 			"comment": "Mauris lacinia sapien quis libero. Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh. In quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet. Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo.",
 			"created_time": "2022-07-09",
 			"upvotes": "18",
-			"src": "/static/images/avatar/1.jpg"
+			"src": "/assets/8.jpg"
 		},
 		{
 			"id": "9",
@@ -79,7 +79,7 @@
 			"comment": "Suspendisse accumsan tortor quis turpis. Sed ante. Vivamus tortor. Duis mattis egestas metus. Aenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh. Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.",
 			"created_time": "2021-11-17",
 			"upvotes": "98",
-			"src": "/static/images/avatar/1.jpg"
+			"src": "/assets/1.jpg"
 		},
 		{
 			"id": "10",
@@ -88,7 +88,7 @@
 			"comment": "Vivamus tortor. Duis mattis egestas metus. Aenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.",
 			"created_time": "2021-09-27",
 			"upvotes": "33",
-			"src": "/static/images/avatar/1.jpg"
+			"src": "/assets/2.jpg"
 		},
 		{
 			"id": "11",
@@ -97,7 +97,7 @@
 			"comment": "Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus. Suspendisse potenti.",
 			"created_time": "2022-05-24",
 			"upvotes": "73",
-			"src": "/static/images/avatar/1.jpg"
+			"src": "/assets/3.jpg"
 		},
 		{
 			"id": "12",
@@ -106,7 +106,7 @@
 			"comment": "Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis. Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem. Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus. Pellentesque at nulla.",
 			"created_time": "2022-07-09",
 			"upvotes": "65",
-			"src": "/static/images/avatar/1.jpg"
+			"src": "/assets/4.jpg"
 		},
 		{
 			"id": "13",
@@ -115,7 +115,7 @@
 			"comment": "Nulla suscipit ligula in lacus. Curabitur at ipsum ac tellus semper interdum. Mauris ullamcorper purus sit amet nulla.",
 			"created_time": "2022-05-19",
 			"upvotes": "93",
-			"src": "/static/images/avatar/1.jpg"
+			"src": "/assets/1.jpg"
 		},
 		{
 			"id": "14",
@@ -124,7 +124,7 @@
 			"comment": "Nullam molestie nibh in lectus. Pellentesque at nulla. Suspendisse potenti. Cras in purus eu magna vulputate luctus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus vestibulum sagittis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
 			"created_time": "2022-03-09",
 			"upvotes": "55",
-			"src": "/static/images/avatar/1.jpg"
+			"src": "/assets/5.jpg"
 		},
 		{
 			"id": "15",
@@ -133,7 +133,7 @@
 			"comment": "In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus. Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst. Maecenas ut massa quis augue luctus tincidunt.",
 			"created_time": "2022-06-15",
 			"upvotes": "43",
-			"src": "/static/images/avatar/1.jpg"
+			"src": "/assets/6.jpg"
 		},
 		{
 			"id": "16",
@@ -142,7 +142,7 @@
 			"comment": "Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem. Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus. Pellentesque at nulla. Suspendisse potenti. Cras in purus eu magna vulputate luctus.",
 			"created_time": "2021-12-11",
 			"upvotes": "90",
-			"src": "/static/images/avatar/1.jpg"
+			"src": "/assets/7.jpg"
 		},
 		{
 			"id": "17",
@@ -151,7 +151,7 @@
 			"comment": "Suspendisse potenti. Cras in purus eu magna vulputate luctus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
 			"created_time": "2021-08-03",
 			"upvotes": "16",
-			"src": "/static/images/avatar/1.jpg"
+			"src": "/assets/8.jpg"
 		},
 		{
 			"id": "18",
@@ -160,7 +160,7 @@
 			"comment": "Suspendisse potenti. Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris. Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.",
 			"created_time": "2022-05-16",
 			"upvotes": "68",
-			"src": "/static/images/avatar/1.jpg"
+			"src": "/assets/1.jpg"
 		},
 		{
 			"id": "19",
@@ -169,7 +169,7 @@
 			"comment": "Vestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat. In congue. Etiam justo. Etiam pretium iaculis justo. In hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus.",
 			"created_time": "2021-09-09",
 			"upvotes": "46",
-			"src": "/static/images/avatar/1.jpg"
+			"src": "/assets/2.jpg"
 		},
 		{
 			"id": "20",
@@ -178,7 +178,7 @@
 			"comment": "Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est. Phasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum. Proin eu mi.",
 			"created_time": "2021-12-01",
 			"upvotes": "51",
-			"src": "/static/images/avatar/1.jpg"
+			"src": "/assets/3.jpg"
 		}
 	]
 }

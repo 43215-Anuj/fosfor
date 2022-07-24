@@ -19,7 +19,7 @@ export const createCommentApi = async (parentId = null, text) => {
 		comment: text,
 		parentId,
 		upvotes: 0,
-		src: "/static/images/avatar/1.jpg",
+		src: "/assets/2.jpg",
 		fullname: "Anuj kumar",
 		created_time: new Date().toISOString().split("T")[0].toString(),
 	};

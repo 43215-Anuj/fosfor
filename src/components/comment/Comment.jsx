@@ -28,7 +28,7 @@ export default function Comment(props) {
 	} = props;
 
 	const [replies, setReplies] = useState();
-	
+
 	useEffect(() => {
 		setReplies(getReplies(comment.id));
 	}, [activeComment, comment, getReplies]);
@@ -242,7 +242,7 @@ export default function Comment(props) {
 									activeComment === reply.id && (
 										<ComponentBox
 											comment={comment}
-											currentuser={comment.src}
+											currentuser={"/assets/2.jpg"}
 											action={action}
 											activeComment={activeComment}
 											setActiveComment={setActiveComment}
@@ -259,7 +259,7 @@ export default function Comment(props) {
 				activeComment === comment.id && (
 					<ComponentBox
 						comment={comment}
-						currentuser={comment.src}
+						currentuser={"/assets/2.jpg"}
 						action={action}
 						activeComment={activeComment}
 						setActiveComment={setActiveComment}
@@ -271,7 +271,7 @@ export default function Comment(props) {
 				activeComment === comment.id && (
 					<ComponentBox
 						comment={comment}
-						currentuser={comment.src}
+						currentuser={"/assets/2.jpg"}
 						activeComment={activeComment}
 						setActiveComment={setActiveComment}
 						action={action}
