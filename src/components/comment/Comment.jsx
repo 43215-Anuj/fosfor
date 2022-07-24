@@ -231,7 +231,9 @@ export default function Comment(props) {
 									action={action}
 									setAction={setAction}
 									handleVotes={handleVotes}
-									updateComment={addComment}
+									updateComment={
+										action === "reply" ? addComment : updateComment
+									}
 									activeComment={activeComment}
 									deleteComment={deleteComment}
 									setActiveComment={setActiveComment}
@@ -241,7 +243,7 @@ export default function Comment(props) {
 									action === "reply" &&
 									activeComment === reply.id && (
 										<ComponentBox
-											comment={comment}
+											comment={reply}
 											currentuser={"/assets/2.jpg"}
 											action={action}
 											activeComment={activeComment}
@@ -253,8 +255,8 @@ export default function Comment(props) {
 									action === "edit" &&
 									activeComment === reply.id && (
 										<ComponentBox
-											comment={comment}
-											currentuser={comment.src}
+											comment={reply}
+											currentuser={reply.src}
 											activeComment={activeComment}
 											setActiveComment={setActiveComment}
 											action={action}
@@ -265,7 +267,6 @@ export default function Comment(props) {
 						);
 					})}
 			</Box>
-
 			{comment.parentId === null &&
 				action === "reply" &&
 				activeComment === comment.id && (

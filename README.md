@@ -28,3 +28,8 @@ This will start the local server at "localhost:3000"
     -> I am preparing the data for the comments and replies, with created time and date for furthur computation.
     -> A responsive UI will be created using the mobile first approach. For that i will be using figma now and then where required.
     -> For the random comment json data, I have used mockaroo.com
+
+
+## short coming  
+    - current user is identified using the "fullname" instead it should use a uniqueID of the user.
+    -
